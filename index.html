@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare the estimated five-year cost of gas-powered vehicles, including depreciation, loan interest, fuel, insurance, and maintenance. Free, with no sign-up.">
+  <meta name="theme-color" content="#101521">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Auto True Cost Analyzer | Compare before you buy">
+  <meta property="og:description" content="The sticker price is only the beginning. Compare estimated five-year ownership costs with this free, browser-only calculator.">
+  <meta property="og:url" content="https://rdanusha.github.io/auto-true-cost-analyzer/">
+  <meta property="og:image" content="https://rdanusha.github.io/auto-true-cost-analyzer/social-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://rdanusha.github.io/auto-true-cost-analyzer/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='.9em' font-size='54'%3E🚗%3C/text%3E%3C/svg%3E">
+  <title>Auto True Cost Analyzer | Compare before you buy</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="calculator.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to calculator</a>
+  <header class="shell">
+    <div class="brand"><span aria-hidden="true">🚗</span> AUTO TRUE COST <span class="badge">FREE TOOL</span></div>
+    <a href="https://github.com/rdanusha/auto-true-cost-analyzer" rel="noopener noreferrer" target="_blank">View source ↗</a>
+  </header>
+  <main id="main" class="shell">
+    <section class="hero">
+      <p class="eyebrow">A CLEARER PICTURE BEFORE YOU BUY</p>
+      <h1>The sticker price<br>is only the <span>beginning.</span></h1>
+      <p class="intro">Compare estimated five-year vehicle ownership costs, from depreciation and financing to everyday running costs.</p>
+      <div class="pills"><span>No sign-up</span><span>No app-side tracking</span><span>Calculates in your browser</span></div>
+    </section>
+    <section class="toolbar" aria-label="Calculator settings">
+      <div><label for="gasPrice">Gas price (USD / US gallon)</label><input id="gasPrice" type="number" value="3.25" min="0" max="1000" step="0.01" inputmode="decimal"><p class="help">Your estimate, not a live fuel price.</p></div>
+      <div class="actions"><button id="addBtn" type="button" class="primary">+ Add vehicle</button><button id="sampleBtn" type="button" class="secondary">Load examples</button><button id="clearBtn" type="button" class="secondary">Clear all</button></div>
+    </section>
+    <p class="note">USD · miles · US gallons · gasoline vehicles only. Example figures are illustrative, not manufacturer data or quotes. Entries are not saved and will reset when you reload.</p>
+    <p id="globalError" class="error" role="status"></p>
+    <section id="vehiclesGrid" class="vehicles-grid" aria-label="Vehicles to compare"></section>
+    <p id="status" class="help" role="status" aria-live="polite"></p>
+    <section id="comparison" class="panel" hidden aria-labelledby="comparisonTitle">
+      <div class="section-heading"><div><p class="eyebrow">THE BIG PICTURE</p><h2 id="comparisonTitle">Your five-year comparison</h2></div><span class="badge">ESTIMATES ONLY</span></div>
+      <div id="verdict" class="verdict"></div>
+      <div class="tabs" role="group" aria-label="Comparison views">
+        <button type="button" class="tab active" data-view="tco" aria-pressed="true">Total cost</button>
+        <button type="button" class="tab" data-view="breakdown" aria-pressed="false">Cost breakdown</button>
+        <button type="button" class="tab" data-view="yearly" aria-pressed="false">Year by year</button>
+        <button type="button" class="tab" data-view="costmile" aria-pressed="false">Cost per mile</button>
+      </div>
+      <div id="view-tco" class="view"></div>
+      <div id="view-breakdown" class="view" hidden></div>
+      <div id="view-yearly" class="view" hidden></div>
+      <div id="view-costmile" class="view" hidden></div>
+    </section>
+    <section class="panel methodology" aria-labelledby="methodTitle">
+      <p class="eyebrow">KNOW WHAT IS IN THE NUMBER</p><h2 id="methodTitle">An estimate, not a prediction.</h2>
+      <p>Five-year cost = depreciation + loan interest paid during five years + fuel + insurance + maintenance. Loan principal is not counted twice.</p>
+      <details><summary>How the calculation works</summary>
+        <ul><li>Loans use fixed monthly payments, monthly interest, no fees, and no early repayments. Terms range from 24 to 84 months.</li><li>For loans longer than five years, remaining loan debt is included. Equivalently: down payment + payments made + remaining debt + running costs − estimated resale value.</li><li>Resale value falls by 20%, 15%, 12%, 10%, then 9% of the previous year's value. This generic model also applies to used cars and may not match your vehicle.</li><li>Year-one maintenance is multiplied by 1, 1.1, 1.25, 1.5, and 1.8 across five years.</li><li>Fuel price, mileage, and monthly insurance are held constant. Cost per mile is unavailable when annual mileage is zero.</li><li>Not included: sales tax, registration, dealer fees, parking, tolls, unexpected repairs outside your maintenance budget, inflation, opportunity cost, or EV charging. Add relevant costs separately.</li></ul>
+      </details>
+      <details><summary>Privacy and limitations</summary><p>Calculations run in your browser. This app does not send your entries to a server, use analytics, or save entries in browser storage. The hosting provider still receives normal web requests and may log connection information. Closing or reloading the page clears your entries. This is an educational planning tool, not financial advice, a quote, or a guaranteed resale value.</p></details>
+    </section>
+    <noscript><p class="error">JavaScript is required to calculate costs. Enable it in your browser to use this tool.</p></noscript>
+  </main>
+  <footer class="shell"><span>Built by Alex · Free and open source</span><a href="https://github.com/rdanusha/auto-true-cost-analyzer/issues" rel="noopener noreferrer" target="_blank">Feedback or a bug? ↗</a></footer>
+  <template id="vehicleTemplate">
+    <article class="vehicle-card">
+      <div class="card-header"><div><p class="eyebrow vehicle-number"></p><h2 class="vehicle-title"></h2></div><button class="remove secondary" type="button">Remove</button></div>
+      <div class="fields"></div>
+      <p class="validation-message error" role="status"></p>
+      <dl class="results"></dl>
+    </article>
+  </template>
+</body>
+</html>

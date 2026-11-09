@@ -1,0 +1,15 @@
+{
+  "name": "auto-true-cost-analyzer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A free browser-only five-year gasoline vehicle cost comparison calculator.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/calculator.test.js",
+    "check": "node --check calculator.js && node --check app.js",
+    "test:e2e": "playwright test",
+    "start": "python3 -m http.server 4178 --bind 127.0.0.1"
+  },
+  "devDependencies": { "@playwright/test": "1.65.0" },
+  "engines": { "node": ">=22" }
+}

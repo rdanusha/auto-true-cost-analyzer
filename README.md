@@ -1,6 +1,6 @@
 # Auto True Cost Analyzer
 
-A free, browser-only tool for comparing the estimated five-year ownership costs of gasoline vehicles. Built by Alex.
+A free, browser-only tool for comparing the estimated five-year ownership costs of gasoline vehicles. Built by rdanusha.
 
 **Planned public app:** https://rdanusha.github.io/auto-true-cost-analyzer/
 
